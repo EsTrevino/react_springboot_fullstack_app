@@ -1,5 +1,7 @@
 package com.estebantrevino.springbackend.controllers;
 
+import javax.validation.Valid;
+
 import com.estebantrevino.springbackend.domain.Project;
 import com.estebantrevino.springbackend.services.ProjectService;
 
@@ -22,9 +24,10 @@ public class ProjectController {
     // we need to be able to create a new project
     // response entity allows us to have more control of our json responses
     @PostMapping
-    public ResponseEntity<Project> createNewProject(@RequestBody Project project) {
+    public ResponseEntity<Project> createNewProject(@Valid @RequestBody Project project) {
 
-        return new ResponseEntity<Project>(project, HttpStatus.CREATED);
+        Project project1 = projectService.saveOrUpdateProject(project);
+        return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
     }
 
 }

@@ -2,13 +2,22 @@ package com.estebantrevino.springbackend.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "projects")
 public class Project {
+    @Id
     private String id;
+    @NotBlank(message = "Project name is required")
     private String projectName;
+    @NotBlank(message = "Project identifier is required")
+    @Size(min = 4, max = 5, message = "Please use between 4 and 5 characters")
     private String projectIdentifier;
+    @NotBlank(message = "Project identifier is required")
     private String description;
     private Date start_date;
     private Date end_date;
